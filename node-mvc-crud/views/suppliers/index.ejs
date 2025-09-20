@@ -1,0 +1,39 @@
+<%- include('../partials/header', {title: 'Suppliers'}) %>
+    <div class="d-flex justify-content-between mb-3">
+        <h1>Danh sách nhà cung cấp</h1>
+        <a href="/suppliers/new" class="btn btn-primary">Thêm nhà cung cấp</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% suppliers.forEach(s => { %>
+                <tr>
+                    <td>
+                        <a href="/suppliers/<%= s._id %>">
+                            <%= s.name %>
+                        </a>
+                    </td>
+                    <td>
+                        <%= s.address %>
+                    </td>
+                    <td>
+                        <%= s.phone %>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" href="/suppliers/<%= s._id %>/edit">Sửa</a>
+                        <form action="/suppliers/<%= s._id %>?_method=DELETE" method="POST" style="display:inline">
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Xoá?')">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+    <%- include('../partials/footer') %>
